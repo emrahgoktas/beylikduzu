@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orman Sığınağı — Masaj Beylikdüzü</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --forest:#14231C; --forest-deep:#0C1712; --cream:#EDE6D6; --moss:#5C7A5C; --amber:#E0A458; --bark:#3A2E22; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--forest);color:var(--cream);font-family:'Karla',sans-serif;font-weight:300;line-height:1.75;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Fraunces',serif;font-weight:400;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:30px 44px;}
+  .logo{font-family:'Fraunces';font-style:italic;font-size:22px;color:var(--amber);}
+  nav{display:flex;gap:34px;font-size:13px;letter-spacing:.06em;}
+  nav a{opacity:.8;transition:.3s;}
+  nav a:hover{opacity:1;color:var(--amber);}
+
+  .hero{position:relative;min-height:104vh;display:flex;align-items:flex-end;
+    background:radial-gradient(ellipse at 30% 20%, rgba(224,164,88,.16), transparent 55%),
+               radial-gradient(ellipse at 80% 70%, rgba(92,122,92,.18), transparent 55%),
+               linear-gradient(180deg, var(--forest-deep) 0%, var(--forest) 60%, #1B2E23 100%);
+    overflow:hidden;padding-bottom:120px;}
+  .glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle, rgba(224,164,88,.38), transparent 70%);top:6%;right:4%;filter:blur(10px);animation:flicker 6s ease-in-out infinite;}
+  @keyframes flicker{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:1;transform:scale(1.07);}}
+  @media (prefers-reduced-motion: reduce){.glow{animation:none;}}
+
+  .leaves{position:absolute;inset:0;pointer-events:none;}
+  .leaf{position:absolute;opacity:.55;animation:fall linear infinite;}
+  .leaf svg{width:100%;height:100%;}
+  @keyframes fall{
+    0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:0;}
+    10%{opacity:.55;}
+    90%{opacity:.5;}
+    100%{transform:translateY(110vh) translateX(60px) rotate(200deg);opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){.leaf{animation:none;display:none;}}
+
+  .hero-inner{position:relative;z-index:2;max-width:660px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);margin-bottom:26px;display:flex;align-items:center;gap:12px;}
+  .eyebrow::before{content:'';width:34px;height:1px;background:var(--amber);}
+  .hero h1{font-size:clamp(42px,6.6vw,76px);line-height:1.12;color:var(--cream);}
+  .hero h1 em{color:var(--amber);font-style:italic;}
+  .hero p{margin-top:26px;font-size:17px;max-width:42ch;color:#C9C2AE;}
+  .cta-row{margin-top:44px;display:flex;gap:20px;}
+  .btn{padding:17px 36px;border:1px solid var(--amber);color:var(--amber);font-size:13px;letter-spacing:.08em;transition:.35s;}
+  .btn:hover{background:var(--amber);color:var(--forest-deep);box-shadow:0 20px 40px -16px rgba(224,164,88,.5);}
+  .btn.solid{background:var(--amber);color:var(--forest-deep);}
+  .btn.solid:hover{background:transparent;color:var(--amber);}
+  .stars-row{margin-top:48px;display:flex;gap:10px;align-items:center;font-size:13px;color:#B7B09B;}
+  .stars{color:var(--amber);letter-spacing:3px;}
+
+  section{padding:140px 0;}
+  .section-head{text-align:center;margin-bottom:80px;}
+  .section-head .eyebrow{justify-content:center;display:flex;}
+  .section-head h2{font-size:clamp(30px,4vw,46px);}
+
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(224,164,88,.15);}
+  .service{background:var(--forest);padding:48px 34px;transition:background .4s, transform .4s;position:relative;}
+  .service:hover{background:#1C2E23;transform:translateY(-6px);}
+  .leaf-icon{width:28px;height:28px;margin-bottom:22px;color:var(--moss);}
+  .service h3{font-size:23px;margin-bottom:12px;color:var(--cream);}
+  .service p{font-size:14px;color:#B7B09B;}
+  .service .price{margin-top:22px;font-family:'Fraunces';font-style:italic;color:var(--amber);font-size:15px;padding-top:18px;border-top:1px solid rgba(224,164,88,.15);}
+
+  .gallery{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:240px 240px;gap:16px;}
+  .g{border-radius:8px;position:relative;overflow:hidden;box-shadow:0 30px 70px -28px rgba(0,0,0,.6);}
+  .g::after{content:'';position:absolute;inset:0;background:linear-gradient(200deg, rgba(20,35,28,.1), rgba(12,23,18,.5));}
+  .g1{grid-row:1/3;background:linear-gradient(150deg,#3A2E22,#5C7A5C 70%,#14231C);}
+  .g2{background:linear-gradient(200deg,#E0A458,#3A2E22 80%);}
+  .g3{background:linear-gradient(200deg,#5C7A5C,#0C1712);}
+  .g4{grid-column:2/4;background:linear-gradient(120deg,#233A2B,#E0A458 65%,#0C1712);}
+
+  .retreat{background:var(--forest-deep);}
+  .retreat-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .retreat-visual{aspect-ratio:1;border-radius:16px;background:radial-gradient(circle at 30% 30%, rgba(224,164,88,.3), transparent 60%),linear-gradient(160deg,#233A2B,#0F1B14);position:relative;overflow:hidden;border:1px solid rgba(224,164,88,.2);box-shadow:0 50px 100px -35px rgba(0,0,0,.6);}
+  .retreat h2{font-size:clamp(30px,4vw,42px);margin-bottom:24px;}
+  .retreat p{font-size:16px;margin-bottom:18px;max-width:44ch;color:#C9C2AE;}
+  .stat-row{display:flex;gap:44px;margin-top:36px;}
+  .stat-row .disp{font-style:italic;font-size:36px;color:var(--amber);}
+  .stat-row span{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8A9086;margin-top:6px;}
+
+  .times{background:linear-gradient(180deg, var(--forest), var(--forest-deep));padding:120px 0;text-align:center;}
+  .times h2{font-size:clamp(28px,3.6vw,38px);margin-bottom:16px;}
+  .times p.sub{color:#B7B09B;margin-bottom:60px;}
+  .time-grid{display:flex;justify-content:center;gap:60px;flex-wrap:wrap;}
+  .time-block .disp{font-size:32px;color:var(--amber);font-style:italic;}
+  .time-block p{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#8A9086;margin-top:8px;}
+
+  .testimonial{padding:60px 0 160px;text-align:center;}
+  .testimonial .stars{justify-content:center;display:flex;font-size:20px;margin-bottom:26px;}
+  .testimonial p{font-family:'Fraunces';font-style:italic;font-size:clamp(24px,3vw,34px);max-width:24ch;margin:0 auto;color:var(--cream);line-height:1.5;}
+  .testimonial span{display:block;margin-top:26px;font-size:13px;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;}
+
+  footer{background:var(--forest-deep);padding:90px 0 40px;text-align:center;}
+  footer .logo{font-size:26px;margin-bottom:20px;display:block;}
+  footer p,footer a{display:block;font-size:15px;color:#B7B09B;margin-bottom:10px;}
+  .foot-bottom{margin-top:50px;padding-top:26px;border-top:1px solid rgba(224,164,88,.14);font-size:12px;color:#6E756A;letter-spacing:.05em;}
+
+  @media(max-width:860px){
+    .services{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px;}
+    .g1{grid-row:auto;grid-column:1/3;}
+    .g4{grid-column:1/3;}
+    .retreat-grid{grid-template-columns:1fr;}
+    nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Orman Sığınağı</div>
+  <nav><a href="#hizmetler">Hizmetler</a><a href="#galeri">Galeri</a><a href="#mekan">Mekân</a><a href="#iletisim">İletişim</a></nav>
+</header>
+
+<section class="hero">
+  <div class="glow"></div>
+  <div class="leaves" id="leafField"></div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Beylikdüzü · Şehir İçinde Doğal Sığınak</div>
+    <h1>Betonun içinde, <em>ormanın</em> sessizliği</h1>
+    <p>Ahşap dokular, mum ışığı ve doğal yağlarla; şehir merkezinde küçük bir orman içine adım atın.</p>
+    <div class="cta-row">
+      <a href="tel:+902125550104" class="btn solid">Randevu Al</a>
+      <a href="#hizmetler" class="btn">Hizmetleri Gör</a>
+    </div>
+    <div class="stars-row"><span class="stars">★★★★★</span> 9.5 / 10 · 380+ misafir yorumu</div>
+  </div>
+</section>
+
+<section id="hizmetler" class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">Bitkilerden İlham</div><h2>Doğal Terapiler</h2></div>
+  <div class="services reveal">
+    <div class="service"><svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/><path d="M4 20C6 16 9 13 13 11"/></svg><h3>Bitkisel Aromaterapi</h3><p>Adaçayı, lavanta ve okaliptüs yağlarıyla zihni sıfırlayan yumuşak dokunuş.</p><div class="price">70 dk · 1.400₺</div></div>
+    <div class="service"><svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/><path d="M4 20C6 16 9 13 13 11"/></svg><h3>Sıcak Taş Ormanı</h3><p>Doğal bazalt taşlarla derin ısı transferi, kronik gerginliği eritir.</p><div class="price">90 dk · 1.700₺</div></div>
+    <div class="service"><svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/><path d="M4 20C6 16 9 13 13 11"/></svg><h3>Klasik Bakım</h3><p>Tüm vücutta kas gerginliğini çözen, doğal yağlarla desteklenen temel masaj.</p><div class="price">60 dk · 1.150₺</div></div>
+    <div class="service"><svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/><path d="M4 20C6 16 9 13 13 11"/></svg><h3>Kök Terapi (Sportif)</h3><p>Aktif bedenler için derin doku çalışması, toparlanmayı hızlandırır.</p><div class="price">60 dk · 1.300₺</div></div>
+    <div class="service"><svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/><path d="M4 20C6 16 9 13 13 11"/></svg><h3>Refleksoloji</h3><p>Ayak tabanındaki noktalardan tüm bedene yayılan doğal denge.</p><div class="price">45 dk · 900₺</div></div>
+    <div class="service"><svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/><path d="M4 20C6 16 9 13 13 11"/></svg><h3>Çift Sığınağı</h3><p>Mum ışığıyla aydınlatılan özel odada, birlikte yaşanan doğal huzur.</p><div class="price">75 dk · 2.400₺</div></div>
+  </div>
+</section>
+
+<section id="galeri" class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">Mekândan</div><h2>Ahşap ve Mum Işığı</h2></div>
+  <div class="gallery reveal"><div class="g g1"></div><div class="g g2"></div><div class="g g3"></div><div class="g g4"></div></div>
+</section>
+
+<section id="mekan" class="retreat">
+  <div class="wrap retreat-grid reveal">
+    <div class="retreat-visual"></div>
+    <div>
+      <h2>Ahşabın, mumun ve sessizliğin mekânı</h2>
+      <p>Orman Sığınağı'nda her oda gerçek ahşap dokularla, doğal mum ışığıyla ve canlı bitkilerle tasarlandı. Amacımız, dört duvar arasında gerçek bir orman hissi yaratmak.</p>
+      <p>Beylikdüzü'nün yeşil alanlarına yakın, sakin bir sokakta; randevulu ve az sayıda misafirle çalışıyoruz.</p>
+      <div class="stat-row">
+        <div><div class="disp">7</div><span>Yıllık Deneyim</span></div>
+        <div><div class="disp">4</div><span>Özel Oda</span></div>
+        <div><div class="disp">4.8</div><span>Ortalama Puan</span></div>
+      </div>
+      <a href="#iletisim" class="btn solid" style="margin-top:36px;display:inline-block;">Yolu Tarif Et</a>
+    </div>
+  </div>
+</section>
+
+<section class="times">
+  <div class="wrap reveal">
+    <h2>Gününüzü Bize Bırakın</h2>
+    <p class="sub">Sabah sessizliğinden akşam alacakaranlığına, her saatin kendi huzuru var.</p>
+    <div class="time-grid">
+      <div class="time-block"><div class="disp">10:00</div><p>Sabah Sakinliği</p></div>
+      <div class="time-block"><div class="disp">14:00</div><p>Öğlen Molası</p></div>
+      <div class="time-block"><div class="disp">19:00</div><p>Akşam Rahatlaması</p></div>
+      <div class="time-block"><div class="disp">21:00</div><p>Son Randevu</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial reveal">
+  <div class="wrap">
+    <div class="stars">★★★★★</div>
+    <p>"Beylikdüzü'nde böyle bir yer olduğuna inanamadım. Gerçekten bir ormana gitmiş gibi hissettim."</p>
+    <span>— Bir Orman Sığınağı Misafiri</span>
+  </div>
+</section>
+
+<footer id="iletisim">
+  <div class="wrap">
+    <span class="logo">Orman Sığınağı</span>
+    <a href="tel:+902125550104">0212 555 01 04</a>
+    <a href="mailto:merhaba@masajbeylikduzu.com">merhaba@masajbeylikduzu.com</a>
+    <p>Gürpınar Mah., Beylikdüzü / İstanbul · Her gün 10:00–21:00</p>
+    <div class="foot-bottom">© 2026 masajbeylikduzu.com — Konsept 4 / 5 — Orman Sığınağı</div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+  els.forEach(el=>io.observe(el));
+
+  const field = document.getElementById('leafField');
+  const leafSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="#E0A458" stroke-width="1.2"><path d="M4 14C4 8 9 3 20 3C20 14 15 19 9 19C6.5 19 5 17.5 4 14Z"/></svg>';
+  if(field && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    for(let i=0;i<10;i++){
+      const leaf = document.createElement('div');
+      leaf.className = 'leaf';
+      leaf.style.left = (Math.random()*100) + '%';
+      leaf.style.width = leaf.style.height = (14 + Math.random()*14) + 'px';
+      leaf.style.animationDuration = (14 + Math.random()*10) + 's';
+      leaf.style.animationDelay = (Math.random()*14) + 's';
+      leaf.innerHTML = leafSVG;
+      field.appendChild(leaf);
+    }
+  }
+</script>
+</body>
+</html>

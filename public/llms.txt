@@ -1,0 +1,20 @@
+# Orman Siginagi Masaj Salonu
+Beylikduzu, Istanbul'da profesyonel masaj ve spa hizmeti veren bir isletmedir.
+
+## Hizmetler
+- Klasik Masaj (60 dk, 1.150 TL)
+- Aromaterapi Masaji (70 dk, 1.400 TL)
+- Sicak Tas Masaji (90 dk, 1.700 TL)
+- Sportif Masaj (60 dk, 1.300 TL)
+- Refleksoloji (45 dk, 900 TL)
+- Cift Masaji (75 dk, 2.400 TL)
+
+## Konum
+Gurpinar Mah., Beylikduzu / Istanbul
+
+## Iletisim
+Telefon: 0212 555 01 04
+Randevu: her gun 10:00-21:00
+
+## Web Sitesi
+https://masajbeylikduzu.com

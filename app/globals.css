@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --forest: #14231c;
+  --forest-deep: #0c1712;
+  --cream: #ede6d6;
+  --moss: #5c7a5c;
+  --amber: #e0a458;
+  --bark: #3a2e22;
+}
+
+@theme inline {
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-cream: var(--cream);
+  --color-moss: var(--moss);
+  --color-amber: var(--amber);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-karla);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-karla), sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 400;
+}
+
+.leaf-fall {
+  animation: fall linear infinite;
+}
+
+.hero-glow {
+  animation: flicker 6s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(110vh) translateX(60px) rotate(200deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-glow,
+  .leaf-fall {
+    animation: none;
+  }
+
+  .leaf-fall {
+    display: none;
+  }
+}

@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Fraunces, Karla } from "next/font/google";
 import { AnalyticsListener } from "@/components/analytics-listener";
 import { MobileStickyBar } from "@/components/mobile-sticky-bar";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { BUSINESS, DEFAULT_THEME_COLOR, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -159,7 +161,11 @@ export default function RootLayout({
           {JSON.stringify(daySpaSchema)}
         </Script>
         <AnalyticsListener />
-        {children}
+        <SiteHeader />
+        <div className="flex min-h-screen flex-col">
+          <div className="flex-1">{children}</div>
+          <SiteFooter />
+        </div>
         <MobileStickyBar />
       </body>
     </html>

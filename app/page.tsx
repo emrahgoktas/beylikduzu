@@ -34,50 +34,7 @@ function LeafIcon() {
 
 export default function Home() {
   return (
-    <>
-      <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 md:px-10">
-        <div className="nav-sheen relative mx-auto flex w-full max-w-6xl items-center justify-between gap-3 overflow-hidden rounded-2xl border border-[rgba(224,164,88,.22)] bg-[rgba(12,23,18,.68)] px-4 py-3 shadow-[0_20px_50px_-30px_rgba(0,0,0,.9)] backdrop-blur md:px-6">
-          <span className="font-display text-xl italic text-[var(--amber)] md:text-2xl">
-            Masaj Beylikduzu
-          </span>
-          <nav className="hidden items-center gap-6 text-xs tracking-[0.1em] text-[var(--cream)]/90 lg:flex">
-            {[
-              ["#hizmetler", "Hizmetler"],
-              ["#galeri", "Galeri"],
-              ["#mekan", "Mekan"],
-              ["#yorumlar", "Yorumlar"],
-            ].map(([href, label]) => (
-              <a
-                key={href}
-                href={href}
-                className="rounded-full px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.12)] hover:text-[var(--amber)]"
-              >
-                {label}
-              </a>
-            ))}
-            <Link
-              href="/sss"
-              className="rounded-full px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.12)] hover:text-[var(--amber)]"
-            >
-              SSS
-            </Link>
-            <Link
-              href="/iletisim"
-              className="rounded-full px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.12)] hover:text-[var(--amber)]"
-            >
-              Iletisim
-            </Link>
-          </nav>
-          <a
-            href={`tel:${BUSINESS.phoneE164}`}
-            className="rounded-full border border-[var(--amber)] bg-[rgba(224,164,88,.08)] px-4 py-2 text-[10px] uppercase tracking-[0.12em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)] md:text-xs"
-          >
-            {BUSINESS.phoneDisplay}
-          </a>
-        </div>
-      </header>
-
-      <main>
+    <main>
         <section className="relative flex min-h-screen items-end overflow-hidden bg-[radial-gradient(ellipse_at_30%_20%,rgba(224,164,88,.16),transparent_55%),radial-gradient(ellipse_at_80%_70%,rgba(92,122,92,.18),transparent_55%),linear-gradient(180deg,var(--forest-deep)_0%,var(--forest)_60%,#1B2E23_100%)] pb-20 pt-44 md:pb-28">
           <div className="absolute inset-0">
             <Image
@@ -406,53 +363,6 @@ export default function Home() {
             </article>
           </div>
         </section>
-      </main>
-
-      <footer className="footer-ambient border-t border-[rgba(224,164,88,.14)] bg-[var(--forest-deep)] pb-24 pt-16 md:pb-12">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-3 md:px-10">
-          <div>
-            <span className="font-display text-2xl italic text-[var(--amber)]">
-              Masaj Beylikduzu
-            </span>
-            <p className="mt-3 text-sm text-[#B7B09B]">
-              Dogal dokular, sakin atmosfer ve profesyonel terapistlerle
-              Beylikduzu&rsquo;nde randevulu masaj deneyimi.
-            </p>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-[var(--amber)]">
-              Hizli Erisim
-            </p>
-            <div className="mt-3 space-y-2 text-sm text-[#B7B09B]">
-              <p>{BUSINESS.addressLine}</p>
-              <a href={`tel:${BUSINESS.phoneE164}`} className="block hover:text-[var(--amber)]">
-                {BUSINESS.phoneDisplay}
-              </a>
-              <a href={BUSINESS.whatsappUrl} target="_blank" rel="noreferrer" className="block hover:text-[var(--amber)]">
-                WhatsApp ile Iletisim
-              </a>
-            </div>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-[var(--amber)]">
-              Cevrimici Randevu
-            </p>
-            <p className="mt-3 text-sm text-[#B7B09B]">
-              Her gun 10:00 - 21:00 arasi telefon ve WhatsApp uzerinden seans
-              planlanir.
-            </p>
-            <a
-              href={`tel:${BUSINESS.phoneE164}`}
-              className="mt-4 inline-flex rounded-full border border-[var(--amber)] px-4 py-2 text-xs uppercase tracking-[0.14em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
-            >
-              Hemen Ara
-            </a>
-          </div>
-        </div>
-        <div className="mx-auto mt-10 max-w-6xl border-t border-[rgba(224,164,88,.14)] px-4 pt-6 text-center text-xs tracking-[0.05em] text-[#6E756A] md:px-10">
-          © 2026 masajbeylikduzu.com - Masaj Beylikduzu
-        </div>
-      </footer>
-    </>
+    </main>
   );
 }

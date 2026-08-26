@@ -1,12 +1,12 @@
 export const SITE_URL = "https://masajbeylikduzu.com";
 
 export const BUSINESS = {
-  name: "Orman Sığınağı Masaj Salonu",
-  shortName: "Orman Sığınağı",
-  phoneDisplay: "0212 555 01 04",
-  phoneE164: "+902125550104",
+  name: "Masaj Beylikduzu",
+  shortName: "Masaj Beylikduzu",
+  phoneDisplay: "0532 151 96 91",
+  phoneE164: "+905321519691",
   whatsappUrl:
-    "https://wa.me/902125550104?text=Merhaba%20Orman%20S%C4%B1%C4%9F%C4%B1na%C4%9F%C4%B1,%20randevu%20almak%20istiyorum.",
+    "https://wa.me/905321519691?text=Merhaba%20Masaj%20Beylikduzu,%20randevu%20almak%20istiyorum.",
   email: "merhaba@masajbeylikduzu.com",
   addressLine: "Gürpınar Mah., Beylikdüzü / İstanbul",
   // TODO: Gercek sokak/cadde ve posta kodu ile guncelle.

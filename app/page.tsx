@@ -35,34 +35,42 @@ function LeafIcon() {
 export default function Home() {
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-[rgba(12,23,18,0.52)] px-4 py-4 backdrop-blur md:px-10">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3">
-          <span className="font-display text-xl italic text-[var(--amber)]">
-            Orman Siginagi
+      <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 md:px-10">
+        <div className="nav-sheen relative mx-auto flex w-full max-w-6xl items-center justify-between gap-3 overflow-hidden rounded-2xl border border-[rgba(224,164,88,.22)] bg-[rgba(12,23,18,.68)] px-4 py-3 shadow-[0_20px_50px_-30px_rgba(0,0,0,.9)] backdrop-blur md:px-6">
+          <span className="font-display text-xl italic text-[var(--amber)] md:text-2xl">
+            Masaj Beylikduzu
           </span>
-          <nav className="hidden items-center gap-7 text-xs tracking-[0.08em] text-[var(--cream)]/90 lg:flex">
-            <a href="#hizmetler" className="hover:text-[var(--amber)]">
-              Hizmetler
-            </a>
-            <a href="#galeri" className="hover:text-[var(--amber)]">
-              Galeri
-            </a>
-            <a href="#mekan" className="hover:text-[var(--amber)]">
-              Mekan
-            </a>
-            <a href="#yorumlar" className="hover:text-[var(--amber)]">
-              Yorumlar
-            </a>
-            <Link href="/sss" className="hover:text-[var(--amber)]">
+          <nav className="hidden items-center gap-6 text-xs tracking-[0.1em] text-[var(--cream)]/90 lg:flex">
+            {[
+              ["#hizmetler", "Hizmetler"],
+              ["#galeri", "Galeri"],
+              ["#mekan", "Mekan"],
+              ["#yorumlar", "Yorumlar"],
+            ].map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                className="rounded-full px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.12)] hover:text-[var(--amber)]"
+              >
+                {label}
+              </a>
+            ))}
+            <Link
+              href="/sss"
+              className="rounded-full px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.12)] hover:text-[var(--amber)]"
+            >
               SSS
             </Link>
-            <Link href="/iletisim" className="hover:text-[var(--amber)]">
+            <Link
+              href="/iletisim"
+              className="rounded-full px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.12)] hover:text-[var(--amber)]"
+            >
               Iletisim
             </Link>
           </nav>
           <a
             href={`tel:${BUSINESS.phoneE164}`}
-            className="rounded-full border border-[var(--amber)] px-4 py-2 text-[10px] uppercase tracking-[0.12em] text-[var(--amber)] md:text-xs"
+            className="rounded-full border border-[var(--amber)] bg-[rgba(224,164,88,.08)] px-4 py-2 text-[10px] uppercase tracking-[0.12em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)] md:text-xs"
           >
             {BUSINESS.phoneDisplay}
           </a>
@@ -71,6 +79,17 @@ export default function Home() {
 
       <main>
         <section className="relative flex min-h-screen items-end overflow-hidden bg-[radial-gradient(ellipse_at_30%_20%,rgba(224,164,88,.16),transparent_55%),radial-gradient(ellipse_at_80%_70%,rgba(92,122,92,.18),transparent_55%),linear-gradient(180deg,var(--forest-deep)_0%,var(--forest)_60%,#1B2E23_100%)] pb-20 pt-44 md:pb-28">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/galery-9.jpeg"
+              alt="Masaj Beylikduzu icin dogal ambiyansli hero arka plan"
+              fill
+              priority
+              className="object-cover opacity-28"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(12,23,18,.94)_24%,rgba(12,23,18,.56)_62%,rgba(12,23,18,.94)_100%)]" />
+          </div>
           <div className="hero-glow absolute right-[4%] top-[6%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(224,164,88,.38),transparent_70%)] blur-[10px]" />
           <div className="absolute inset-0 pointer-events-none">
             {leaves.map((leaf, index) => (
@@ -90,31 +109,65 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative z-10 mx-auto w-full max-w-6xl px-4 md:px-10">
-            <p className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.23em] text-[var(--amber)]">
-              <span className="inline-block h-px w-8 bg-[var(--amber)]" />
-              Beylikduzu · Sehir Icinde Dogal Siginak
-            </p>
-            <h1 className="max-w-4xl text-4xl leading-[1.12] text-[var(--cream)] sm:text-6xl md:text-7xl">
-              Beylikduzu Masaj Salonu - Betonun icinde,{" "}
-              <em className="italic text-[var(--amber)]">ormanin</em>{" "}
-              sessizligi
-            </h1>
-            <p className="mt-6 max-w-2xl text-base text-[#C9C2AE] md:text-lg">
-              Orman Siginagi, Beylikduzu&rsquo;nde ahsap dokular, mum isigi ve dogal
-              yaglarla klasik, aromaterapi, sicak tas ve sportif masaj sunan
-              bir masaj salonudur.
-            </p>
-            <div className="mt-9">
-              <CtaButtons />
+          <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-8 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-10">
+            <div>
+              <p className="fade-up mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.23em] text-[var(--amber)]">
+                <span className="inline-block h-px w-8 bg-[var(--amber)]" />
+                Beylikduzu · Sehir Icinde Dogal Siginak
+              </p>
+              <h1 className="fade-up fade-up-delay-1 max-w-4xl text-4xl leading-[1.08] text-[var(--cream)] sm:text-6xl md:text-7xl">
+                Beylikduzu Masaj Salonu - Ruhunuza iyi gelen{" "}
+                <em className="italic text-[var(--amber)]">sessiz bir mola</em>
+              </h1>
+              <p className="fade-up fade-up-delay-2 mt-6 max-w-2xl text-base text-[#C9C2AE] md:text-lg">
+                Masaj Beylikduzu, Beylikduzu&rsquo;nde ahsap dokular, mum isigi
+                ve profesyonel terapistlerle klasik, aromaterapi, sicak tas ve
+                sportif masaj hizmetlerini randevulu olarak sunar.
+              </p>
+              <div className="fade-up fade-up-delay-3 mt-9">
+                <CtaButtons />
+              </div>
+              <p className="mt-8 flex items-center gap-2 text-sm text-[#B7B09B]">
+                <span className="tracking-[0.2em] text-[var(--amber)]">
+                  ★★★★★
+                </span>
+                Misafir memnuniyeti odakli deneyim · 10:00-21:00 randevu
+              </p>
             </div>
-            <p className="mt-8 flex items-center gap-2 text-sm text-[#B7B09B]">
-              <span className="tracking-[0.2em] text-[var(--amber)]">
-                ★★★★★
-              </span>
-              Ornek puan alani - gercek deger Google Business Profile ile
-              guncellenecek.
-            </p>
+
+            <aside className="border-pulse fade-up fade-up-delay-3 self-end rounded-2xl border border-[rgba(224,164,88,.28)] bg-[rgba(12,23,18,.78)] p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,.95)]">
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--amber)]">
+                Hizli Randevu Bilgisi
+              </p>
+              <ul className="mt-4 space-y-3 text-sm text-[#C9C2AE]">
+                <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
+                  <span>Klasik Masaj</span>
+                  <span className="font-display italic text-[var(--amber)]">
+                    60 dk
+                  </span>
+                </li>
+                <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
+                  <span>Aromaterapi</span>
+                  <span className="font-display italic text-[var(--amber)]">
+                    70 dk
+                  </span>
+                </li>
+                <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
+                  <span>Sicak Tas</span>
+                  <span className="font-display italic text-[var(--amber)]">
+                    90 dk
+                  </span>
+                </li>
+              </ul>
+              <a
+                href={BUSINESS.whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-[var(--amber)] px-4 py-3 text-xs uppercase tracking-[0.15em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
+              >
+                WhatsApp ile Hizli Rezervasyon
+              </a>
+            </aside>
           </div>
         </section>
 
@@ -162,39 +215,39 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl">Mekanimizdan Kareler</h2>
           </div>
           <div className="grid auto-rows-[220px] gap-4 md:grid-cols-3">
-            <div className="relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:row-span-2">
+            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:row-span-2">
               <Image
-                src="/images/galeri-1.svg"
-                alt="Orman Siginagi Beylikduzu masaj salonu ic mekan gorunumu"
+                src="/images/galery-1.jpeg"
+                alt="Masaj Beylikduzu ic mekan gorunumu"
                 fill
-                className="object-cover"
+                className="lift-image object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            <div className="relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
+            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
               <Image
-                src="/images/galeri-2.svg"
+                src="/images/galery-2.jpeg"
                 alt="Beylikduzu spa terapi odasi ambiyansi"
                 fill
-                className="object-cover"
+                className="lift-image object-cover"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
             </div>
-            <div className="relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
+            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
               <Image
-                src="/images/galeri-3.svg"
-                alt="Orman Siginagi mum isigi ve ahsap detaylar"
+                src="/images/galery-3.jpeg"
+                alt="Masaj Beylikduzu mum isigi ve ahsap detaylar"
                 fill
-                className="object-cover"
+                className="lift-image object-cover"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
             </div>
-            <div className="relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:col-span-2">
+            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:col-span-2">
               <Image
-                src="/images/galeri-4.svg"
+                src="/images/galery-4.jpeg"
                 alt="Beylikduzu masaj salonu dinlenme alani"
                 fill
-                className="object-cover"
+                className="lift-image object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -205,8 +258,8 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:px-10">
             <div className="relative aspect-square overflow-hidden rounded-2xl border border-[rgba(224,164,88,.2)] shadow-[0_50px_100px_-35px_rgba(0,0,0,.6)]">
               <Image
-                src="/images/retreat.svg"
-                alt="Orman Siginagi Beylikduzu terapi alani genel gorunum"
+                src="/images/galery-5.jpeg"
+                alt="Masaj Beylikduzu terapi alani genel gorunum"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -214,11 +267,11 @@ export default function Home() {
             </div>
             <article>
               <h2 className="text-3xl sm:text-4xl">
-                Neden Orman Siginagi&rsquo;ni Secmelisiniz
+                Neden Masaj Beylikduzu&rsquo;nu Secmelisiniz
               </h2>
               <p className="mt-6 text-[#C9C2AE]">
-                Orman Siginagi&rsquo;nda her oda gercek ahsap dokularla, dogal mum
-                isigiyla ve canli bitkilerle tasarlandi. Orman Siginagi,
+                Mekanda her oda gercek ahsap dokularla, dogal mum isigiyla ve
+                canli bitkilerle tasarlandi. Masaj Beylikduzu,
                 Beylikduzu&rsquo;nde masaj deneyimini yogun sehir temposundan ayrisan
                 sakin bir ritimde sunar.
               </p>
@@ -252,7 +305,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-4 md:px-10">
             <h2 className="text-3xl sm:text-4xl">Salonumuz Hangi Saatlerde Acik?</h2>
             <p className="mx-auto mt-4 max-w-xl text-[#B7B09B]">
-              Orman Siginagi, Beylikduzu&rsquo;nde her gun 10:00-21:00 saatleri
+              Masaj Beylikduzu, Beylikduzu&rsquo;nde her gun 10:00-21:00 saatleri
               arasinda randevu kabul eder.
             </p>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -305,7 +358,7 @@ export default function Home() {
           <article className="rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-8">
             <h2 className="text-3xl sm:text-4xl">Sikca Sorulan Sorular</h2>
             <p className="mt-4 max-w-3xl text-[#C9C2AE]">
-              Orman Siginagi Beylikduzu masaj salonu hakkinda fiyat, randevu,
+              Masaj Beylikduzu hakkinda fiyat, randevu,
               cift masaji ve aromaterapi gibi sorularin net cevaplarini SSS
               sayfasinda bulabilirsiniz.
             </p>
@@ -323,7 +376,7 @@ export default function Home() {
             <article>
               <h2 className="text-3xl sm:text-4xl">Bize Ulasin</h2>
               <p className="mt-5 text-[#C9C2AE]">
-                Orman Siginagi, Beylikduzu&rsquo;nde randevulu calisan bir masaj
+                Masaj Beylikduzu, Beylikduzu&rsquo;nde randevulu calisan bir masaj
                 salonudur. Telefon ve WhatsApp hatti uzerinden hizli sekilde
                 seans saati planlayabilirsiniz.
               </p>
@@ -355,16 +408,49 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-[rgba(224,164,88,.14)] bg-[var(--forest-deep)] pb-24 pt-14 text-center md:pb-12">
-        <div className="mx-auto max-w-6xl px-4 md:px-10">
-          <span className="font-display text-2xl italic text-[var(--amber)]">
-            Orman Siginagi
-          </span>
-          <p className="mt-4 text-sm text-[#B7B09B]">{BUSINESS.addressLine}</p>
-          <p className="text-sm text-[#B7B09B]">{BUSINESS.phoneDisplay}</p>
-          <p className="mt-8 border-t border-[rgba(224,164,88,.14)] pt-6 text-xs tracking-[0.05em] text-[#6E756A]">
-            © 2026 masajbeylikduzu.com - Orman Siginagi
-          </p>
+      <footer className="footer-ambient border-t border-[rgba(224,164,88,.14)] bg-[var(--forest-deep)] pb-24 pt-16 md:pb-12">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-3 md:px-10">
+          <div>
+            <span className="font-display text-2xl italic text-[var(--amber)]">
+              Masaj Beylikduzu
+            </span>
+            <p className="mt-3 text-sm text-[#B7B09B]">
+              Dogal dokular, sakin atmosfer ve profesyonel terapistlerle
+              Beylikduzu&rsquo;nde randevulu masaj deneyimi.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.14em] text-[var(--amber)]">
+              Hizli Erisim
+            </p>
+            <div className="mt-3 space-y-2 text-sm text-[#B7B09B]">
+              <p>{BUSINESS.addressLine}</p>
+              <a href={`tel:${BUSINESS.phoneE164}`} className="block hover:text-[var(--amber)]">
+                {BUSINESS.phoneDisplay}
+              </a>
+              <a href={BUSINESS.whatsappUrl} target="_blank" rel="noreferrer" className="block hover:text-[var(--amber)]">
+                WhatsApp ile Iletisim
+              </a>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.14em] text-[var(--amber)]">
+              Cevrimici Randevu
+            </p>
+            <p className="mt-3 text-sm text-[#B7B09B]">
+              Her gun 10:00 - 21:00 arasi telefon ve WhatsApp uzerinden seans
+              planlanir.
+            </p>
+            <a
+              href={`tel:${BUSINESS.phoneE164}`}
+              className="mt-4 inline-flex rounded-full border border-[var(--amber)] px-4 py-2 text-xs uppercase tracking-[0.14em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
+            >
+              Hemen Ara
+            </a>
+          </div>
+        </div>
+        <div className="mx-auto mt-10 max-w-6xl border-t border-[rgba(224,164,88,.14)] px-4 pt-6 text-center text-xs tracking-[0.05em] text-[#6E756A] md:px-10">
+          © 2026 masajbeylikduzu.com - Masaj Beylikduzu
         </div>
       </footer>
     </>

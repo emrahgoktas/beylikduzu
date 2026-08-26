@@ -6,14 +6,14 @@ import { FAQS } from "@/data/faqs";
 export const metadata: Metadata = {
   title: "Beylikduzu Masaj Salonu SSS ve Fiyat Bilgileri",
   description:
-    "Orman Siginagi Beylikduzu masaj salonu hakkinda sik sorulan sorular: fiyatlar, randevu, cift masaji, aromaterapi ve calisma saatleri.",
+    "Masaj Beylikduzu hakkinda sik sorulan sorular: fiyatlar, randevu, cift masaji, aromaterapi ve calisma saatleri.",
   alternates: {
     canonical: "/sss",
   },
   openGraph: {
     title: "Beylikduzu Masaj Salonu SSS ve Fiyat Bilgileri",
     description:
-      "Orman Siginagi Beylikduzu masaj salonu hakkinda sik sorulan sorular: fiyatlar, randevu, cift masaji, aromaterapi ve calisma saatleri.",
+      "Masaj Beylikduzu hakkinda sik sorulan sorular: fiyatlar, randevu, cift masaji, aromaterapi ve calisma saatleri.",
     url: "/sss",
     locale: "tr_TR",
     images: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Orman Siginagi SSS sayfasi",
+        alt: "Masaj Beylikduzu SSS sayfasi",
       },
     ],
   },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Beylikduzu Masaj Salonu SSS ve Fiyat Bilgileri",
     description:
-      "Orman Siginagi Beylikduzu masaj salonu hakkinda sik sorulan sorular: fiyatlar, randevu, cift masaji, aromaterapi ve calisma saatleri.",
+      "Masaj Beylikduzu hakkinda sik sorulan sorular: fiyatlar, randevu, cift masaji, aromaterapi ve calisma saatleri.",
     images: ["/og-image.svg"],
   },
   other: {
@@ -63,7 +63,7 @@ export default function FaqPage() {
         </p>
         <h1 className="mt-4 text-4xl">Sikca Sorulan Sorular</h1>
         <p className="mt-4 max-w-3xl text-[#C9C2AE]">
-          Orman Siginagi Beylikduzu masaj salonu hakkinda kullanicilarin
+          Masaj Beylikduzu hakkinda kullanicilarin
           arama motorlarina ve yapay zeka asistanlarina en sik sordugu
           sorulari acik, kisa ve kaynaklanabilir bicimde yanitliyoruz.
         </p>

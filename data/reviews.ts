@@ -8,7 +8,7 @@ export type Review = {
 // TODO: Gercek Google yorumlarini senkronize et.
 export const REVIEWS: Review[] = [
   {
-    author: "Bir Orman Siginagi Misafiri",
+    author: "Bir Masaj Beylikduzu Misafiri",
     rating: 5,
     text: "Beylikduzu'nde boyle bir yer olduguna inanamadim. Gercekten bir ormana gitmis gibi hissettim.",
     source: "Website",
@@ -16,7 +16,7 @@ export const REVIEWS: Review[] = [
   {
     author: "Istanbul Avrupa Yakasi Misafiri",
     rating: 5,
-    text: "Orman Siginagi'nda klasik masaj seansindan sonra kaslarim belirgin sekilde rahatladigini hissettim.",
+    text: "Masaj Beylikduzu'nda klasik masaj seansindan sonra kaslarim belirgin sekilde rahatladigini hissettim.",
     source: "Website",
   },
   {

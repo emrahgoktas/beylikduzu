@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import { BUSINESS } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Iletisim | Beylikduzu Masaj Salonu Orman Siginagi",
+  title: "Iletisim | Beylikduzu Masaj Salonu Masaj Beylikduzu",
   description:
-    "Orman Siginagi Beylikduzu masaj salonu ile iletisime gecin. Telefon, WhatsApp, adres ve yol tarifi bilgilerine bu sayfadan ulasin.",
+    "Masaj Beylikduzu ile iletisime gecin. Telefon, WhatsApp, adres ve yol tarifi bilgilerine bu sayfadan ulasin.",
   alternates: {
     canonical: "/iletisim",
   },
   openGraph: {
-    title: "Iletisim | Beylikduzu Masaj Salonu Orman Siginagi",
+    title: "Iletisim | Beylikduzu Masaj Salonu Masaj Beylikduzu",
     description:
-      "Orman Siginagi Beylikduzu masaj salonu ile iletisime gecin. Telefon, WhatsApp, adres ve yol tarifi bilgilerine bu sayfadan ulasin.",
+      "Masaj Beylikduzu ile iletisime gecin. Telefon, WhatsApp, adres ve yol tarifi bilgilerine bu sayfadan ulasin.",
     url: "/iletisim",
     locale: "tr_TR",
     images: [
@@ -19,15 +19,15 @@ export const metadata: Metadata = {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Orman Siginagi iletisim sayfasi",
+        alt: "Masaj Beylikduzu iletisim sayfasi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Iletisim | Beylikduzu Masaj Salonu Orman Siginagi",
+    title: "Iletisim | Beylikduzu Masaj Salonu Masaj Beylikduzu",
     description:
-      "Orman Siginagi Beylikduzu masaj salonu ile iletisime gecin. Telefon, WhatsApp, adres ve yol tarifi bilgilerine bu sayfadan ulasin.",
+      "Masaj Beylikduzu ile iletisime gecin. Telefon, WhatsApp, adres ve yol tarifi bilgilerine bu sayfadan ulasin.",
     images: ["/og-image.svg"],
   },
   other: {
@@ -41,7 +41,7 @@ export default function ContactPage() {
       <header className="rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-8">
         <h1 className="text-4xl">Bize Ulasin</h1>
         <p className="mt-4 max-w-3xl text-[#C9C2AE]">
-          Orman Siginagi, Beylikduzu&rsquo;nde randevulu hizmet veren bir masaj
+          Masaj Beylikduzu, Beylikduzu&rsquo;nde randevulu hizmet veren bir masaj
           salonudur. Randevu almak veya hizmet detaylarini ogrenmek icin telefon
           ve WhatsApp kanallarimizi kullanabilirsiniz.
         </p>

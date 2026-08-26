@@ -24,7 +24,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Adacayi, lavanta ve okaliptus yaglariyla zihni sifirlayan yumusak dokunus.",
     detail: [
-      "Orman Siginagi, Beylikduzu'nde aromaterapi masaji hizmetini sertifikali terapistler esliginde sunar.",
+      "Masaj Beylikduzu, Beylikduzu'nde aromaterapi masaji hizmetini sertifikali terapistler esliginde sunar.",
       "Aromaterapi seansinda secilen bitkisel yaglar kaslarin gevsemesine yardim ederken zihinsel yorgunlugu azaltmayi hedefler.",
     ],
   },
@@ -37,7 +37,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Dogal bazalt taslarla derin isi transferi, kronik gerginligi eritir.",
     detail: [
-      "Orman Siginagi, Beylikduzu'nde sicak tas masaji uygulamasinda dogal bazalt taslar kullanir.",
+      "Masaj Beylikduzu, Beylikduzu'nde sicak tas masaji uygulamasinda dogal bazalt taslar kullanir.",
       "Sicak tas masaji, ozellikle sirt ve boyun bolgesindeki yogun kas sertlikleri icin daha derin bir rahatlama sunar.",
     ],
   },
@@ -50,7 +50,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Tum vucutta kas gerginligini cozen, dogal yaglarla desteklenen temel masaj.",
     detail: [
-      "Orman Siginagi, Beylikduzu'nde klasik masaj seanslarini hem gunluk stres hem de kas yorgunlugu icin planlar.",
+      "Masaj Beylikduzu, Beylikduzu'nde klasik masaj seanslarini hem gunluk stres hem de kas yorgunlugu icin planlar.",
       "Klasik masaj, duzenli uygulandiginda durus kalitesini destekler ve genel rahatlama hissini artirir.",
     ],
   },
@@ -63,7 +63,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Aktif bedenler icin derin doku calismasi, toparlanmayi hizlandirir.",
     detail: [
-      "Orman Siginagi, Beylikduzu'nde sportif masaj hizmetini aktif yasam suren misafirler icin uygular.",
+      "Masaj Beylikduzu, Beylikduzu'nde sportif masaj hizmetini aktif yasam suren misafirler icin uygular.",
       "Sportif masaj, egzersiz sonrasi toparlanmaya destek olmak ve hareket kabiliyetini korumak amaciyla hedefli bolgelere odaklanir.",
     ],
   },
@@ -76,7 +76,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Ayak tabanindaki noktalardan tum bedene yayilan dogal denge.",
     detail: [
-      "Orman Siginagi, Beylikduzu'nde refleksoloji seanslarini ayak tabanindaki basinc noktalarina odaklanarak gerceklestirir.",
+      "Masaj Beylikduzu, Beylikduzu'nde refleksoloji seanslarini ayak tabanindaki basinc noktalarina odaklanarak gerceklestirir.",
       "Refleksoloji uygulamasi, gunluk yorgunlugu azaltmaya ve bedenin genel denge hissini desteklemeye yardimci olur.",
     ],
   },
@@ -89,7 +89,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Mum isigiyla aydinlatilan ozel odada, birlikte yasanan dogal huzur.",
     detail: [
-      "Orman Siginagi, Beylikduzu'nde cift masaji hizmetini ozel oda duzeninde ayni anda iki kisiye sunar.",
+      "Masaj Beylikduzu, Beylikduzu'nde cift masaji hizmetini ozel oda duzeninde ayni anda iki kisiye sunar.",
       "Cift masaji, birlikte kaliteli zaman gecirmek isteyen misafirler icin sakin bir ortamda planlanan eszamanli bir seanstir.",
     ],
   },

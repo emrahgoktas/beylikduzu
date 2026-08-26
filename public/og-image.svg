@@ -3,16 +3,16 @@
   <circle cx="925" cy="145" r="210" fill="url(#glow)" fill-opacity="0.72"/>
   <rect x="95" y="116" width="1010" height="398" rx="28" fill="#14231C" stroke="#E0A458" stroke-opacity="0.35"/>
   <text x="148" y="234" fill="#E0A458" font-size="44" font-family="Georgia, serif" font-style="italic">
-    Orman Siginagi
+    Masaj Beylikduzu
   </text>
   <text x="148" y="316" fill="#EDE6D6" font-size="62" font-family="Georgia, serif">
     Beylikduzu Masaj Salonu
   </text>
   <text x="148" y="378" fill="#C9C2AE" font-size="28" font-family="Arial, sans-serif">
-    Klasik " Aromaterapi " Sicak Tas " Sportif Masaj
+    Klasik - Aromaterapi - Sicak Tas - Sportif Masaj
   </text>
   <text x="148" y="430" fill="#B7B09B" font-size="24" font-family="Arial, sans-serif">
-    Her gun 10:00-21:00 " 0212 555 01 04
+    Her gun 10:00-21:00 - 0532 151 96 91
   </text>
   <defs>
     <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(925 145) rotate(90) scale(210)">

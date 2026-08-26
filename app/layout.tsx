@@ -22,17 +22,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      "Beylikduzu Masaj Salonu | Orman Siginagi Masaj Merkezi",
-    template: "%s | Orman Siginagi Masaj Salonu",
+      "Beylikduzu Masaj Salonu | Masaj Beylikduzu",
+    template: "%s | Masaj Beylikduzu",
   },
   description:
-    "Beylikduzu'nde dogal, sakin ve profesyonel masaj deneyimi. Klasik, aromaterapi, sicak tas ve sportif masaj hizmetleri. Hemen randevu alin: 0212 555 01 04",
+    "Beylikduzu'nde dogal, sakin ve profesyonel masaj deneyimi. Klasik, aromaterapi, sicak tas ve sportif masaj hizmetleri. Hemen randevu alin: 0532 151 96 91",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title:
-      "Beylikduzu Masaj Salonu | Orman Siginagi - Profesyonel Masaj Merkezi",
+      "Beylikduzu Masaj Salonu | Masaj Beylikduzu - Profesyonel Masaj Merkezi",
     description:
       "Beylikduzu'nde dogal, sakin ve profesyonel masaj deneyimi. Klasik, aromaterapi, sicak tas ve sportif masaj hizmetleri.",
     url: SITE_URL,
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Orman Siginagi Beylikduzu masaj salonu marka gorseli",
+        alt: "Masaj Beylikduzu masaj salonu marka gorseli",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Beylikduzu Masaj Salonu | Orman Siginagi - Profesyonel Masaj Merkezi",
+      "Beylikduzu Masaj Salonu | Masaj Beylikduzu - Profesyonel Masaj Merkezi",
     description:
       "Beylikduzu'nde dogal, sakin ve profesyonel masaj deneyimi. Klasik, aromaterapi, sicak tas ve sportif masaj hizmetleri.",
     images: ["/og-image.svg"],

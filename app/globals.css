@@ -54,6 +54,97 @@ h4,
   animation: flicker 6s ease-in-out infinite;
 }
 
+.fade-up {
+  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fade-up-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.fade-up-delay-2 {
+  animation-delay: 0.22s;
+}
+
+.fade-up-delay-3 {
+  animation-delay: 0.32s;
+}
+
+.nav-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(224, 164, 88, 0.12) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: sheenMove 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.border-pulse {
+  animation: borderPulse 4.8s ease-in-out infinite;
+}
+
+.lift-image {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lift-group:hover .lift-image {
+  transform: scale(1.06);
+}
+
+.footer-ambient {
+  position: relative;
+}
+
+.footer-ambient::before {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  right: 10%;
+  top: -140px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(224, 164, 88, 0.14), transparent 70%);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheenMove {
+  0% {
+    transform: translateX(-120%);
+  }
+  40%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes borderPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(224, 164, 88, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(224, 164, 88, 0);
+  }
+}
+
 @keyframes flicker {
   0%,
   100% {
@@ -89,11 +180,22 @@ h4,
   }
 
   .hero-glow,
-  .leaf-fall {
+  .leaf-fall,
+  .fade-up,
+  .border-pulse {
     animation: none;
   }
 
   .leaf-fall {
     display: none;
+  }
+
+  .nav-sheen::after,
+  .footer-ambient::before {
+    display: none;
+  }
+
+  .lift-group:hover .lift-image {
+    transform: none;
   }
 }

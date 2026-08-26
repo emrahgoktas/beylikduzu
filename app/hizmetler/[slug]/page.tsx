@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = `${service.name} | Beylikduzu Masaj Salonu`;
-  const description = `Orman Siginagi, Beylikduzu'nde ${service.name.toLowerCase()} hizmetini ${service.duration} seans suresiyle sunar. Bilgi ve randevu icin: ${BUSINESS.phoneDisplay}`;
+  const description = `Masaj Beylikduzu, Beylikduzu'nde ${service.name.toLowerCase()} hizmetini ${service.duration} seans suresiyle sunar. Bilgi ve randevu icin: ${BUSINESS.phoneDisplay}`;
   const canonical = `/hizmetler/${service.slug}`;
 
   return {
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${service.name} - Orman Siginagi Beylikduzu`,
+          alt: `${service.name} - Masaj Beylikduzu`,
         },
       ],
     },

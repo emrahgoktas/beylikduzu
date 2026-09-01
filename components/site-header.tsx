@@ -41,6 +41,12 @@ export function SiteHeader() {
           >
             Iletisim
           </Link>
+          <Link
+            href="/admin"
+            className="rounded-full border border-[rgba(224,164,88,.45)] px-3 py-1.5 transition hover:bg-[rgba(224,164,88,.16)] hover:text-[var(--amber)]"
+          >
+            Admin
+          </Link>
         </nav>
 
         <a

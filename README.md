@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Masaj Beylikduzu
 
-## Getting Started
+Next.js App Router tabanli landing page + Supabase destekli admin panel.
 
-First, run the development server:
+## Lokal Calistirma
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ortam Degiskenleri
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`.env.local` dosyasina asagidakileri ekleyin:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_GA_ID=
+NEXT_PUBLIC_GTM_ID=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+```
 
-## Learn More
+## Supabase Kurulumu
 
-To learn more about Next.js, take a look at the following resources:
+1. Supabase projesi olusturun.
+2. SQL Editor uzerinden `supabase/schema.sql` dosyasini calistirin.
+3. Supabase Authentication icin Email/Password provider acik olsun.
+4. `profiles` tablosunda admin kullanicinin `role` degerini `admin` yapin.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Admin Panel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Giris sayfasi: `/giris`
+- Admin panel: `/admin`
+- Galeri yonetimi: `/admin` icerisinden slot bazli gorsel yukleme
 
-## Deploy on Vercel
+Yukleme ekraninda her slot icin onerilen gorsel boyutu belirtilir ve oran kontrolu yapilir.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Vercel Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel ile deploy edilirken Project Settings > Environment Variables alanina su degerleri ekleyin:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_GA_ID` (opsiyonel)
+- `NEXT_PUBLIC_GTM_ID` (opsiyonel)
+
+Supabase env degerleri girilmediginde public sayfalar fallback gorsellerle calisir, admin girisi aktif olmaz.

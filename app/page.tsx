@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CtaButtons } from "@/components/cta-buttons";
+import { GALLERY_SLOTS } from "@/data/gallery-slots";
 import { REVIEWS } from "@/data/reviews";
 import { SERVICES } from "@/data/services";
+import { getGalleryImages } from "@/lib/gallery";
 import { BUSINESS } from "@/lib/site";
 
 const leaves = [
@@ -32,337 +34,360 @@ function LeafIcon() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const galleryImages = await getGalleryImages();
+
   return (
     <main>
-        <section className="relative flex min-h-screen items-end overflow-hidden bg-[radial-gradient(ellipse_at_30%_20%,rgba(224,164,88,.16),transparent_55%),radial-gradient(ellipse_at_80%_70%,rgba(92,122,92,.18),transparent_55%),linear-gradient(180deg,var(--forest-deep)_0%,var(--forest)_60%,#1B2E23_100%)] pb-20 pt-44 md:pb-28">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/galery-9.jpeg"
-              alt="Masaj Beylikduzu icin dogal ambiyansli hero arka plan"
-              fill
-              priority
-              className="object-cover opacity-28"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(12,23,18,.94)_24%,rgba(12,23,18,.56)_62%,rgba(12,23,18,.94)_100%)]" />
+      <section className="relative flex min-h-screen items-end overflow-hidden bg-[radial-gradient(ellipse_at_30%_20%,rgba(224,164,88,.16),transparent_55%),radial-gradient(ellipse_at_80%_70%,rgba(92,122,92,.18),transparent_55%),linear-gradient(180deg,var(--forest-deep)_0%,var(--forest)_60%,#1B2E23_100%)] pb-20 pt-44 md:pb-28">
+        <div className="absolute inset-0">
+          <Image
+            src={galleryImages.hero.src}
+            alt={galleryImages.hero.alt}
+            fill
+            priority
+            className="object-cover opacity-28"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(12,23,18,.94)_24%,rgba(12,23,18,.56)_62%,rgba(12,23,18,.94)_100%)]" />
+        </div>
+        <div className="hero-glow absolute right-[4%] top-[6%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(224,164,88,.38),transparent_70%)] blur-[10px]" />
+        <div className="absolute inset-0 pointer-events-none">
+          {leaves.map((leaf, index) => (
+            <div
+              key={`${leaf.left}-${index}`}
+              className="leaf-fall absolute opacity-55 text-[var(--amber)]"
+              style={{
+                left: leaf.left,
+                width: `${leaf.size}px`,
+                height: `${leaf.size}px`,
+                animationDuration: `${leaf.duration}s`,
+                animationDelay: `${leaf.delay}s`,
+              }}
+            >
+              <LeafIcon />
+            </div>
+          ))}
+        </div>
+
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-8 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-10">
+          <div>
+            <p className="fade-up mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.23em] text-[var(--amber)]">
+              <span className="inline-block h-px w-8 bg-[var(--amber)]" />
+              Beylikduzu · Sehir Icinde Dogal Siginak
+            </p>
+            <h1 className="fade-up fade-up-delay-1 max-w-4xl text-4xl leading-[1.08] text-[var(--cream)] sm:text-6xl md:text-7xl">
+              Beylikduzu Masaj Salonu - Ruhunuza iyi gelen{" "}
+              <em className="italic text-[var(--amber)]">sessiz bir mola</em>
+            </h1>
+            <p className="fade-up fade-up-delay-2 mt-6 max-w-2xl text-base text-[#C9C2AE] md:text-lg">
+              Masaj Beylikduzu, Beylikduzu&rsquo;nde ahsap dokular, mum isigi ve
+              profesyonel terapistlerle klasik, aromaterapi, sicak tas ve
+              sportif masaj hizmetlerini randevulu olarak sunar.
+            </p>
+            <div className="fade-up fade-up-delay-3 mt-9">
+              <CtaButtons />
+            </div>
+            <p className="mt-8 flex items-center gap-2 text-sm text-[#B7B09B]">
+              <span className="tracking-[0.2em] text-[var(--amber)]">★★★★★</span>
+              Misafir memnuniyeti odakli deneyim · 10:00-21:00 randevu
+            </p>
           </div>
-          <div className="hero-glow absolute right-[4%] top-[6%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(224,164,88,.38),transparent_70%)] blur-[10px]" />
-          <div className="absolute inset-0 pointer-events-none">
-            {leaves.map((leaf, index) => (
-              <div
-                key={`${leaf.left}-${index}`}
-                className="leaf-fall absolute opacity-55 text-[var(--amber)]"
-                style={{
-                  left: leaf.left,
-                  width: `${leaf.size}px`,
-                  height: `${leaf.size}px`,
-                  animationDuration: `${leaf.duration}s`,
-                  animationDelay: `${leaf.delay}s`,
-                }}
-              >
+
+          <aside className="border-pulse fade-up fade-up-delay-3 self-end rounded-2xl border border-[rgba(224,164,88,.28)] bg-[rgba(12,23,18,.78)] p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,.95)]">
+            <p className="text-xs uppercase tracking-[0.18em] text-[var(--amber)]">
+              Hizli Randevu Bilgisi
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-[#C9C2AE]">
+              <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
+                <span>Klasik Masaj</span>
+                <span className="font-display italic text-[var(--amber)]">60 dk</span>
+              </li>
+              <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
+                <span>Aromaterapi</span>
+                <span className="font-display italic text-[var(--amber)]">70 dk</span>
+              </li>
+              <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
+                <span>Sicak Tas</span>
+                <span className="font-display italic text-[var(--amber)]">90 dk</span>
+              </li>
+            </ul>
+            <a
+              href={BUSINESS.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-[var(--amber)] px-4 py-3 text-xs uppercase tracking-[0.15em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
+            >
+              WhatsApp ile Hizli Rezervasyon
+            </a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="hizmetler" className="mx-auto max-w-6xl px-4 py-28 md:px-10">
+        <div className="mb-16 text-center">
+          <p className="mb-4 text-xs uppercase tracking-[0.24em] text-[var(--amber)]">
+            Bitkilerden Ilham
+          </p>
+          <h2 className="text-3xl sm:text-4xl">
+            Beylikduzu&rsquo;nde Masaj Hizmetlerimiz
+          </h2>
+        </div>
+        <div className="grid gap-px bg-[rgba(224,164,88,.15)] md:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((service) => (
+            <article
+              key={service.slug}
+              className="bg-[var(--forest)] p-8 transition hover:-translate-y-1 hover:bg-[#1C2E23]"
+            >
+              <div className="mb-5 h-7 w-7 text-[var(--moss)]">
                 <LeafIcon />
               </div>
-            ))}
-          </div>
-
-          <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-8 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-10">
-            <div>
-              <p className="fade-up mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.23em] text-[var(--amber)]">
-                <span className="inline-block h-px w-8 bg-[var(--amber)]" />
-                Beylikduzu · Sehir Icinde Dogal Siginak
+              <h3 className="text-2xl text-[var(--cream)]">{service.name}</h3>
+              <p className="mt-3 text-sm text-[#B7B09B]">{service.shortDescription}</p>
+              <p className="mt-5 border-t border-[rgba(224,164,88,.15)] pt-4 font-display text-sm italic text-[var(--amber)]">
+                {service.duration} · {service.price}
               </p>
-              <h1 className="fade-up fade-up-delay-1 max-w-4xl text-4xl leading-[1.08] text-[var(--cream)] sm:text-6xl md:text-7xl">
-                Beylikduzu Masaj Salonu - Ruhunuza iyi gelen{" "}
-                <em className="italic text-[var(--amber)]">sessiz bir mola</em>
-              </h1>
-              <p className="fade-up fade-up-delay-2 mt-6 max-w-2xl text-base text-[#C9C2AE] md:text-lg">
-                Masaj Beylikduzu, Beylikduzu&rsquo;nde ahsap dokular, mum isigi
-                ve profesyonel terapistlerle klasik, aromaterapi, sicak tas ve
-                sportif masaj hizmetlerini randevulu olarak sunar.
-              </p>
-              <div className="fade-up fade-up-delay-3 mt-9">
-                <CtaButtons />
-              </div>
-              <p className="mt-8 flex items-center gap-2 text-sm text-[#B7B09B]">
-                <span className="tracking-[0.2em] text-[var(--amber)]">
-                  ★★★★★
-                </span>
-                Misafir memnuniyeti odakli deneyim · 10:00-21:00 randevu
-              </p>
-            </div>
-
-            <aside className="border-pulse fade-up fade-up-delay-3 self-end rounded-2xl border border-[rgba(224,164,88,.28)] bg-[rgba(12,23,18,.78)] p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,.95)]">
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--amber)]">
-                Hizli Randevu Bilgisi
-              </p>
-              <ul className="mt-4 space-y-3 text-sm text-[#C9C2AE]">
-                <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
-                  <span>Klasik Masaj</span>
-                  <span className="font-display italic text-[var(--amber)]">
-                    60 dk
-                  </span>
-                </li>
-                <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
-                  <span>Aromaterapi</span>
-                  <span className="font-display italic text-[var(--amber)]">
-                    70 dk
-                  </span>
-                </li>
-                <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
-                  <span>Sicak Tas</span>
-                  <span className="font-display italic text-[var(--amber)]">
-                    90 dk
-                  </span>
-                </li>
-              </ul>
-              <a
-                href={BUSINESS.whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-[var(--amber)] px-4 py-3 text-xs uppercase tracking-[0.15em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
+              <Link
+                href={`/hizmetler/${service.slug}`}
+                className="mt-5 inline-block text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
               >
-                WhatsApp ile Hizli Rezervasyon
-              </a>
-            </aside>
-          </div>
-        </section>
-
-        <section id="hizmetler" className="mx-auto max-w-6xl px-4 py-28 md:px-10">
-          <div className="mb-16 text-center">
-            <p className="mb-4 text-xs uppercase tracking-[0.24em] text-[var(--amber)]">
-              Bitkilerden Ilham
-            </p>
-            <h2 className="text-3xl sm:text-4xl">
-              Beylikduzu&rsquo;nde Masaj Hizmetlerimiz
-            </h2>
-          </div>
-          <div className="grid gap-px bg-[rgba(224,164,88,.15)] md:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((service) => (
-              <article
-                key={service.slug}
-                className="bg-[var(--forest)] p-8 transition hover:-translate-y-1 hover:bg-[#1C2E23]"
-              >
-                <div className="mb-5 h-7 w-7 text-[var(--moss)]">
-                  <LeafIcon />
-                </div>
-                <h3 className="text-2xl text-[var(--cream)]">{service.name}</h3>
-                <p className="mt-3 text-sm text-[#B7B09B]">
-                  {service.shortDescription}
-                </p>
-                <p className="mt-5 border-t border-[rgba(224,164,88,.15)] pt-4 font-display text-sm italic text-[var(--amber)]">
-                  {service.duration} · {service.price}
-                </p>
-                <Link
-                  href={`/hizmetler/${service.slug}`}
-                  className="mt-5 inline-block text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
-                >
-                  Detayi Incele
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="galeri" className="mx-auto max-w-6xl px-4 py-10 md:px-10">
-          <div className="mb-12 text-center">
-            <p className="mb-4 text-xs uppercase tracking-[0.24em] text-[var(--amber)]">
-              Mekandan
-            </p>
-            <h2 className="text-3xl sm:text-4xl">Mekanimizdan Kareler</h2>
-          </div>
-          <div className="grid auto-rows-[220px] gap-4 md:grid-cols-3">
-            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:row-span-2">
-              <Image
-                src="/images/galery-1.jpeg"
-                alt="Masaj Beylikduzu ic mekan gorunumu"
-                fill
-                className="lift-image object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
-              <Image
-                src="/images/galery-2.jpeg"
-                alt="Beylikduzu spa terapi odasi ambiyansi"
-                fill
-                className="lift-image object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-            </div>
-            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
-              <Image
-                src="/images/galery-3.jpeg"
-                alt="Masaj Beylikduzu mum isigi ve ahsap detaylar"
-                fill
-                className="lift-image object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-            </div>
-            <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:col-span-2">
-              <Image
-                src="/images/galery-4.jpeg"
-                alt="Beylikduzu masaj salonu dinlenme alani"
-                fill
-                className="lift-image object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section id="mekan" className="mt-20 bg-[var(--forest-deep)] py-24">
-          <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:px-10">
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-[rgba(224,164,88,.2)] shadow-[0_50px_100px_-35px_rgba(0,0,0,.6)]">
-              <Image
-                src="/images/galery-5.jpeg"
-                alt="Masaj Beylikduzu terapi alani genel gorunum"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-            <article>
-              <h2 className="text-3xl sm:text-4xl">
-                Neden Masaj Beylikduzu&rsquo;nu Secmelisiniz
-              </h2>
-              <p className="mt-6 text-[#C9C2AE]">
-                Mekanda her oda gercek ahsap dokularla, dogal mum isigiyla ve
-                canli bitkilerle tasarlandi. Masaj Beylikduzu,
-                Beylikduzu&rsquo;nde masaj deneyimini yogun sehir temposundan ayrisan
-                sakin bir ritimde sunar.
-              </p>
-              <p className="mt-4 text-[#C9C2AE]">
-                Beylikduzu&rsquo;nun yesil alanlarina yakin, sakin bir sokakta
-                randevulu ve az sayida misafirle calisiyoruz.
-              </p>
-              <div className="mt-8 flex gap-10">
-                <div>
-                  <p className="font-display text-4xl italic text-[var(--amber)]">
-                    7
-                  </p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.08em] text-[#8A9086]">
-                    Yillik Deneyim
-                  </p>
-                </div>
-                <div>
-                  <p className="font-display text-4xl italic text-[var(--amber)]">
-                    4
-                  </p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.08em] text-[#8A9086]">
-                    Ozel Oda
-                  </p>
-                </div>
-              </div>
+                Detayi Incele
+              </Link>
             </article>
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        <section className="bg-[linear-gradient(180deg,var(--forest),var(--forest-deep))] py-24 text-center">
-          <div className="mx-auto max-w-6xl px-4 md:px-10">
-            <h2 className="text-3xl sm:text-4xl">Salonumuz Hangi Saatlerde Acik?</h2>
-            <p className="mx-auto mt-4 max-w-xl text-[#B7B09B]">
-              Masaj Beylikduzu, Beylikduzu&rsquo;nde her gun 10:00-21:00 saatleri
-              arasinda randevu kabul eder.
-            </p>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                ["10:00", "Sabah Sakinligi"],
-                ["14:00", "Oglen Molasi"],
-                ["19:00", "Aksam Rahatlamasi"],
-                ["21:00", "Son Randevu"],
-              ].map(([time, label]) => (
-                <div key={time}>
-                  <p className="font-display text-3xl italic text-[var(--amber)]">
-                    {time}
-                  </p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.1em] text-[#8A9086]">
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="yorumlar" className="mx-auto max-w-6xl px-4 py-24 md:px-10">
-          <h2 className="text-center text-3xl sm:text-4xl">
-            Misafir Yorumlari ve Sosyal Kanit
-          </h2>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {REVIEWS.map((review, index) => (
-              <article
-                key={`${review.author}-${index}`}
-                className="rounded-xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-6"
-              >
-                <p className="text-[var(--amber)]">{"★".repeat(review.rating)}</p>
-                <p className="mt-3 text-sm text-[#C9C2AE]">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <p className="mt-4 text-xs uppercase tracking-[0.08em] text-[#9ea593]">
-                  {review.author} · {review.source}
-                </p>
-              </article>
-            ))}
-          </div>
-          <p className="mt-6 text-center text-xs text-[#8A9086]">
-            TODO: Google Places API ile gercek yorumlar dinamik olarak
-            baglanacak.
+      <section id="galeri" className="mx-auto max-w-6xl px-4 py-10 md:px-10">
+        <div className="mb-12 text-center">
+          <p className="mb-4 text-xs uppercase tracking-[0.24em] text-[var(--amber)]">
+            Mekandan
           </p>
-        </section>
-
-        <section className="mx-auto max-w-6xl px-4 pb-10 md:px-10">
-          <article className="rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-8">
-            <h2 className="text-3xl sm:text-4xl">Sikca Sorulan Sorular</h2>
-            <p className="mt-4 max-w-3xl text-[#C9C2AE]">
-              Masaj Beylikduzu hakkinda fiyat, randevu,
-              cift masaji ve aromaterapi gibi sorularin net cevaplarini SSS
-              sayfasinda bulabilirsiniz.
-            </p>
-            <Link
-              href="/sss"
-              className="mt-6 inline-block rounded-full border border-[var(--amber)] px-6 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
-            >
-              Tum SSS Icerigini Gor
-            </Link>
-          </article>
-        </section>
-
-        <section id="iletisim" className="border-t border-[rgba(224,164,88,.14)] bg-[var(--forest-deep)] py-20">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2 md:px-10">
-            <article>
-              <h2 className="text-3xl sm:text-4xl">Bize Ulasin</h2>
-              <p className="mt-5 text-[#C9C2AE]">
-                Masaj Beylikduzu, Beylikduzu&rsquo;nde randevulu calisan bir masaj
-                salonudur. Telefon ve WhatsApp hatti uzerinden hizli sekilde
-                seans saati planlayabilirsiniz.
-              </p>
-              <div className="mt-6 space-y-2 text-sm text-[#B7B09B]">
-                <p>Telefon: {BUSINESS.phoneDisplay}</p>
-                <p>Adres: {BUSINESS.addressLine}</p>
-                <p>Saatler: {BUSINESS.openingHours}</p>
-              </div>
-              <div className="mt-7">
-                <CtaButtons compact />
-              </div>
-            </article>
-            <article className="rounded-xl border border-[rgba(224,164,88,.15)] p-6">
-              <h3 className="text-2xl">Yol Tarifi</h3>
-              <p className="mt-4 text-sm text-[#B7B09B]">
-                Google Haritalar uzerinden dogrudan rota almak icin baglantiyi
-                kullanin.
-              </p>
-              <a
-                href={BUSINESS.mapsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-block rounded-full border border-[var(--amber)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
-              >
-                Yol Tarifi Al
-              </a>
-            </article>
+          <h2 className="text-3xl sm:text-4xl">Mekanimizdan Kareler</h2>
+          <p className="mx-auto mt-4 max-w-3xl text-sm text-[#B7B09B]">
+            Gorsel yuklerken kalite kaybi olmamasi icin asagidaki olculeri baz
+            alin. Bu olculer galeri alanlarinin oranlariyla birebir uyumludur.
+          </p>
+        </div>
+        <div className="grid auto-rows-[220px] gap-4 md:grid-cols-3">
+          <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:row-span-2">
+            <Image
+              src={galleryImages.gallery1.src}
+              alt={galleryImages.gallery1.alt}
+              fill
+              className="lift-image object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
-        </section>
+          <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
+            <Image
+              src={galleryImages.gallery2.src}
+              alt={galleryImages.gallery2.alt}
+              fill
+              className="lift-image object-cover"
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
+          </div>
+          <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)]">
+            <Image
+              src={galleryImages.gallery3.src}
+              alt={galleryImages.gallery3.alt}
+              fill
+              className="lift-image object-cover"
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
+          </div>
+          <div className="lift-group relative overflow-hidden rounded-lg shadow-[0_30px_70px_-28px_rgba(0,0,0,.6)] md:col-span-2">
+            <Image
+              src={galleryImages.gallery4.src}
+              alt={galleryImages.gallery4.alt}
+              fill
+              className="lift-image object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+        <div className="mt-6 rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.6)] p-5">
+          <h3 className="text-lg text-[var(--cream)]">Resim Yukleme Olcu Rehberi</h3>
+          <ul className="mt-3 grid gap-2 text-sm text-[#C9C2AE] md:grid-cols-2">
+            <li>
+              {GALLERY_SLOTS.hero.label}: {GALLERY_SLOTS.hero.recommendedWidth}x
+              {GALLERY_SLOTS.hero.recommendedHeight} px (
+              {GALLERY_SLOTS.hero.ratioLabel})
+            </li>
+            <li>
+              {GALLERY_SLOTS.gallery1.label}:{" "}
+              {GALLERY_SLOTS.gallery1.recommendedWidth}x
+              {GALLERY_SLOTS.gallery1.recommendedHeight} px (
+              {GALLERY_SLOTS.gallery1.ratioLabel})
+            </li>
+            <li>
+              Kucuk kartlar: {GALLERY_SLOTS.gallery2.recommendedWidth}x
+              {GALLERY_SLOTS.gallery2.recommendedHeight} px (
+              {GALLERY_SLOTS.gallery2.ratioLabel})
+            </li>
+            <li>
+              {GALLERY_SLOTS.gallery4.label}:{" "}
+              {GALLERY_SLOTS.gallery4.recommendedWidth}x
+              {GALLERY_SLOTS.gallery4.recommendedHeight} px (
+              {GALLERY_SLOTS.gallery4.ratioLabel})
+            </li>
+            <li>
+              {GALLERY_SLOTS.retreat.label}:{" "}
+              {GALLERY_SLOTS.retreat.recommendedWidth}x
+              {GALLERY_SLOTS.retreat.recommendedHeight} px (
+              {GALLERY_SLOTS.retreat.ratioLabel})
+            </li>
+            <li>Format: JPG veya WebP, dosya boyutu idealde 500 KB alti</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="mekan" className="mt-20 bg-[var(--forest-deep)] py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:px-10">
+          <div className="relative aspect-square overflow-hidden rounded-2xl border border-[rgba(224,164,88,.2)] shadow-[0_50px_100px_-35px_rgba(0,0,0,.6)]">
+            <Image
+              src={galleryImages.retreat.src}
+              alt={galleryImages.retreat.alt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+          <article>
+            <h2 className="text-3xl sm:text-4xl">
+              Neden Masaj Beylikduzu&rsquo;nu Secmelisiniz
+            </h2>
+            <p className="mt-6 text-[#C9C2AE]">
+              Mekanda her oda gercek ahsap dokularla, dogal mum isigiyla ve
+              canli bitkilerle tasarlandi. Masaj Beylikduzu, Beylikduzu&rsquo;nde
+              masaj deneyimini yogun sehir temposundan ayrisan sakin bir ritimde
+              sunar.
+            </p>
+            <p className="mt-4 text-[#C9C2AE]">
+              Beylikduzu&rsquo;nun yesil alanlarina yakin, sakin bir sokakta
+              randevulu ve az sayida misafirle calisiyoruz.
+            </p>
+            <div className="mt-8 flex gap-10">
+              <div>
+                <p className="font-display text-4xl italic text-[var(--amber)]">7</p>
+                <p className="mt-1 text-xs uppercase tracking-[0.08em] text-[#8A9086]">
+                  Yillik Deneyim
+                </p>
+              </div>
+              <div>
+                <p className="font-display text-4xl italic text-[var(--amber)]">4</p>
+                <p className="mt-1 text-xs uppercase tracking-[0.08em] text-[#8A9086]">
+                  Ozel Oda
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="bg-[linear-gradient(180deg,var(--forest),var(--forest-deep))] py-24 text-center">
+        <div className="mx-auto max-w-6xl px-4 md:px-10">
+          <h2 className="text-3xl sm:text-4xl">Salonumuz Hangi Saatlerde Acik?</h2>
+          <p className="mx-auto mt-4 max-w-xl text-[#B7B09B]">
+            Masaj Beylikduzu, Beylikduzu&rsquo;nde her gun 10:00-21:00 saatleri
+            arasinda randevu kabul eder.
+          </p>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["10:00", "Sabah Sakinligi"],
+              ["14:00", "Oglen Molasi"],
+              ["19:00", "Aksam Rahatlamasi"],
+              ["21:00", "Son Randevu"],
+            ].map(([time, label]) => (
+              <div key={time}>
+                <p className="font-display text-3xl italic text-[var(--amber)]">{time}</p>
+                <p className="mt-2 text-xs uppercase tracking-[0.1em] text-[#8A9086]">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="yorumlar" className="mx-auto max-w-6xl px-4 py-24 md:px-10">
+        <h2 className="text-center text-3xl sm:text-4xl">
+          Misafir Yorumlari ve Sosyal Kanit
+        </h2>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {REVIEWS.map((review, index) => (
+            <article
+              key={`${review.author}-${index}`}
+              className="rounded-xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-6"
+            >
+              <p className="text-[var(--amber)]">{"★".repeat(review.rating)}</p>
+              <p className="mt-3 text-sm text-[#C9C2AE]">&ldquo;{review.text}&rdquo;</p>
+              <p className="mt-4 text-xs uppercase tracking-[0.08em] text-[#9ea593]">
+                {review.author} · {review.source}
+              </p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 text-center text-xs text-[#8A9086]">
+          TODO: Google Places API ile gercek yorumlar dinamik olarak baglanacak.
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pb-10 md:px-10">
+        <article className="rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-8">
+          <h2 className="text-3xl sm:text-4xl">Sikca Sorulan Sorular</h2>
+          <p className="mt-4 max-w-3xl text-[#C9C2AE]">
+            Masaj Beylikduzu hakkinda fiyat, randevu, cift masaji ve aromaterapi
+            gibi sorularin net cevaplarini SSS sayfasinda bulabilirsiniz.
+          </p>
+          <Link
+            href="/sss"
+            className="mt-6 inline-block rounded-full border border-[var(--amber)] px-6 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
+          >
+            Tum SSS Icerigini Gor
+          </Link>
+        </article>
+      </section>
+
+      <section
+        id="iletisim"
+        className="border-t border-[rgba(224,164,88,.14)] bg-[var(--forest-deep)] py-20"
+      >
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2 md:px-10">
+          <article>
+            <h2 className="text-3xl sm:text-4xl">Bize Ulasin</h2>
+            <p className="mt-5 text-[#C9C2AE]">
+              Masaj Beylikduzu, Beylikduzu&rsquo;nde randevulu calisan bir masaj
+              salonudur. Telefon ve WhatsApp hatti uzerinden hizli sekilde seans
+              saati planlayabilirsiniz.
+            </p>
+            <div className="mt-6 space-y-2 text-sm text-[#B7B09B]">
+              <p>Telefon: {BUSINESS.phoneDisplay}</p>
+              <p>Adres: {BUSINESS.addressLine}</p>
+              <p>Saatler: {BUSINESS.openingHours}</p>
+            </div>
+            <div className="mt-7">
+              <CtaButtons compact />
+            </div>
+          </article>
+          <article className="rounded-xl border border-[rgba(224,164,88,.15)] p-6">
+            <h3 className="text-2xl">Yol Tarifi</h3>
+            <p className="mt-4 text-sm text-[#B7B09B]">
+              Google Haritalar uzerinden dogrudan rota almak icin baglantiyi
+              kullanin.
+            </p>
+            <a
+              href={BUSINESS.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-block rounded-full border border-[var(--amber)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
+            >
+              Yol Tarifi Al
+            </a>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }

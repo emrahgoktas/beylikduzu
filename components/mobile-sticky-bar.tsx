@@ -2,20 +2,25 @@
 
 import { BUSINESS } from "@/lib/site";
 import { pushEvent } from "@/lib/analytics";
+import type { BusinessSettings } from "@/lib/site-settings";
 
-export function MobileStickyBar() {
+export function MobileStickyBar({
+  business = BUSINESS,
+}: {
+  business?: BusinessSettings;
+}) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[rgba(224,164,88,0.3)] bg-[rgba(12,23,18,0.95)] p-3 backdrop-blur md:hidden">
       <div className="mx-auto grid max-w-3xl grid-cols-2 gap-2">
         <a
-          href={`tel:${BUSINESS.phoneE164}`}
+          href={`tel:${business.phoneE164}`}
           className="rounded-full bg-[var(--amber)] px-3 py-3 text-center text-xs font-medium uppercase tracking-[0.12em] text-[var(--forest-deep)]"
           onClick={() => pushEvent("telefon_tiklama", { location: "sticky_bar" })}
         >
           Randevu Al
         </a>
         <a
-          href={BUSINESS.whatsappUrl}
+          href={business.whatsappUrl}
           target="_blank"
           rel="noreferrer"
           className="rounded-full border border-[var(--amber)] px-3 py-3 text-center text-xs font-medium uppercase tracking-[0.12em] text-[var(--amber)]"

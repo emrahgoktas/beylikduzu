@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BUSINESS } from "@/lib/site";
+import { getBusinessSettings } from "@/lib/site-settings";
 
 export const metadata: Metadata = {
   title: "Iletisim | Beylikduzu Masaj Salonu Masaj Beylikduzu",
@@ -35,7 +35,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const business = await getBusinessSettings();
+
   return (
     <main className="mx-auto max-w-5xl px-4 pb-28 pt-36 md:px-10">
       <header className="rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-8">
@@ -51,20 +53,20 @@ export default function ContactPage() {
         <article className="rounded-xl border border-[rgba(224,164,88,.15)] p-6">
           <h2 className="text-2xl">Iletisim Bilgileri</h2>
           <ul className="mt-4 space-y-2 text-[#C9C2AE]">
-            <li>Telefon: {BUSINESS.phoneDisplay}</li>
-            <li>E-posta: {BUSINESS.email}</li>
-            <li>Adres: {BUSINESS.addressLine}</li>
-            <li>Calisma Saatleri: {BUSINESS.openingHours}</li>
+            <li>Telefon: {business.phoneDisplay}</li>
+            <li>E-posta: {business.email}</li>
+            <li>Adres: {business.addressLine}</li>
+            <li>Calisma Saatleri: {business.openingHours}</li>
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href={`tel:${BUSINESS.phoneE164}`}
+              href={`tel:${business.phoneE164}`}
               className="rounded-full bg-[var(--amber)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--forest-deep)]"
             >
               Telefonu Ara
             </a>
             <a
-              href={BUSINESS.whatsappUrl}
+              href={business.whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="rounded-full border border-[var(--amber)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
@@ -80,7 +82,7 @@ export default function ContactPage() {
             kullanabilirsiniz.
           </p>
           <a
-            href={BUSINESS.mapsUrl}
+            href={business.mapsUrl}
             target="_blank"
             rel="noreferrer"
             className="mt-6 inline-block rounded-full border border-[var(--amber)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"

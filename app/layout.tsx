@@ -2,10 +2,9 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Fraunces, Karla } from "next/font/google";
 import { AnalyticsListener } from "@/components/analytics-listener";
-import { MobileStickyBar } from "@/components/mobile-sticky-bar";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { LayoutShell } from "@/components/layout-shell";
 import { BUSINESS, DEFAULT_THEME_COLOR, SITE_URL } from "@/lib/site";
+import { getBusinessSettings } from "@/lib/site-settings";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -76,52 +75,11 @@ export const viewport: Viewport = {
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
-const daySpaSchema = {
-  "@context": "https://schema.org",
-  "@type": "DaySpa",
-  "@id": `${SITE_URL}/#business`,
-  name: BUSINESS.name,
-  image: `${SITE_URL}/og-image.svg`,
-  url: SITE_URL,
-  telephone: BUSINESS.phoneE164,
-  priceRange: "₺₺",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: BUSINESS.streetAddress,
-    addressLocality: "Beylikduzu",
-    addressRegion: "Istanbul",
-    postalCode: BUSINESS.postalCode,
-    addressCountry: "TR",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: BUSINESS.latitude,
-    longitude: BUSINESS.longitude,
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "10:00",
-      closes: "21:00",
-    },
-  ],
-  // TODO: Gercek Google puani ve yorum sayisi girildiginde aktif edin.
-  // aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "380" },
-  sameAs: [BUSINESS.googleBusinessUrl, BUSINESS.instagramUrl],
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const business = await getBusinessSettings();
+
   return (
     <html
       lang="tr"
@@ -158,15 +116,49 @@ export default function RootLayout({
         ) : null}
 
         <Script id="jsonld-dayspa" type="application/ld+json">
-          {JSON.stringify(daySpaSchema)}
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "DaySpa",
+            "@id": `${SITE_URL}/#business`,
+            name: business.name,
+            image: `${SITE_URL}/og-image.svg`,
+            url: SITE_URL,
+            telephone: business.phoneE164,
+            priceRange: "₺₺",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: BUSINESS.streetAddress,
+              addressLocality: "Beylikduzu",
+              addressRegion: "Istanbul",
+              postalCode: BUSINESS.postalCode,
+              addressCountry: "TR",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: BUSINESS.latitude,
+              longitude: BUSINESS.longitude,
+            },
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday",
+                ],
+                opens: "10:00",
+                closes: "21:00",
+              },
+            ],
+            sameAs: [BUSINESS.googleBusinessUrl, BUSINESS.instagramUrl],
+          })}
         </Script>
         <AnalyticsListener />
-        <SiteHeader />
-        <div className="flex min-h-screen flex-col">
-          <div className="flex-1">{children}</div>
-          <SiteFooter />
-        </div>
-        <MobileStickyBar />
+        <LayoutShell business={business}>{children}</LayoutShell>
       </body>
     </html>
   );

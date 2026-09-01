@@ -5,7 +5,7 @@ import { GALLERY_SLOTS } from "@/data/gallery-slots";
 import { REVIEWS } from "@/data/reviews";
 import { SERVICES } from "@/data/services";
 import { getGalleryImages } from "@/lib/gallery";
-import { BUSINESS } from "@/lib/site";
+import { getBusinessSettings, getHomepageContent } from "@/lib/site-settings";
 
 const leaves = [
   { left: "8%", size: 16, duration: 16, delay: 1 },
@@ -35,6 +35,8 @@ function LeafIcon() {
 }
 
 export default async function Home() {
+  const business = await getBusinessSettings();
+  const content = await getHomepageContent();
   const galleryImages = await getGalleryImages();
 
   return (
@@ -74,23 +76,23 @@ export default async function Home() {
           <div>
             <p className="fade-up mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.23em] text-[var(--amber)]">
               <span className="inline-block h-px w-8 bg-[var(--amber)]" />
-              Beylikduzu · Sehir Icinde Dogal Siginak
+              {content.heroEyebrow}
             </p>
             <h1 className="fade-up fade-up-delay-1 max-w-4xl text-4xl leading-[1.08] text-[var(--cream)] sm:text-6xl md:text-7xl">
-              Beylikduzu Masaj Salonu - Ruhunuza iyi gelen{" "}
-              <em className="italic text-[var(--amber)]">sessiz bir mola</em>
+              {content.heroTitlePrefix}{" "}
+              <em className="italic text-[var(--amber)]">
+                {content.heroTitleHighlight}
+              </em>
             </h1>
             <p className="fade-up fade-up-delay-2 mt-6 max-w-2xl text-base text-[#C9C2AE] md:text-lg">
-              Masaj Beylikduzu, Beylikduzu&rsquo;nde ahsap dokular, mum isigi ve
-              profesyonel terapistlerle klasik, aromaterapi, sicak tas ve
-              sportif masaj hizmetlerini randevulu olarak sunar.
+              {content.heroDescription}
             </p>
             <div className="fade-up fade-up-delay-3 mt-9">
-              <CtaButtons />
+              <CtaButtons business={business} />
             </div>
             <p className="mt-8 flex items-center gap-2 text-sm text-[#B7B09B]">
               <span className="tracking-[0.2em] text-[var(--amber)]">★★★★★</span>
-              Misafir memnuniyeti odakli deneyim · 10:00-21:00 randevu
+              {content.heroBadge}
             </p>
           </div>
 
@@ -99,21 +101,20 @@ export default async function Home() {
               Hizli Randevu Bilgisi
             </p>
             <ul className="mt-4 space-y-3 text-sm text-[#C9C2AE]">
-              <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
-                <span>Klasik Masaj</span>
-                <span className="font-display italic text-[var(--amber)]">60 dk</span>
-              </li>
-              <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
-                <span>Aromaterapi</span>
-                <span className="font-display italic text-[var(--amber)]">70 dk</span>
-              </li>
-              <li className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2">
-                <span>Sicak Tas</span>
-                <span className="font-display italic text-[var(--amber)]">90 dk</span>
-              </li>
+              {content.quickCards.slice(0, 3).map((card) => (
+                <li
+                  key={`${card.label}-${card.value}`}
+                  className="flex items-start justify-between gap-3 border-b border-[rgba(224,164,88,.18)] pb-2"
+                >
+                  <span>{card.label}</span>
+                  <span className="font-display italic text-[var(--amber)]">
+                    {card.value}
+                  </span>
+                </li>
+              ))}
             </ul>
             <a
-              href={BUSINESS.whatsappUrl}
+              href={business.whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-[var(--amber)] px-4 py-3 text-xs uppercase tracking-[0.15em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
@@ -130,7 +131,7 @@ export default async function Home() {
             Bitkilerden Ilham
           </p>
           <h2 className="text-3xl sm:text-4xl">
-            Beylikduzu&rsquo;nde Masaj Hizmetlerimiz
+            {content.servicesHeading}
           </h2>
         </div>
         <div className="grid gap-px bg-[rgba(224,164,88,.15)] md:grid-cols-2 lg:grid-cols-3">
@@ -163,10 +164,9 @@ export default async function Home() {
           <p className="mb-4 text-xs uppercase tracking-[0.24em] text-[var(--amber)]">
             Mekandan
           </p>
-          <h2 className="text-3xl sm:text-4xl">Mekanimizdan Kareler</h2>
+          <h2 className="text-3xl sm:text-4xl">{content.galleryHeading}</h2>
           <p className="mx-auto mt-4 max-w-3xl text-sm text-[#B7B09B]">
-            Gorsel yuklerken kalite kaybi olmamasi icin asagidaki olculeri baz
-            alin. Bu olculer galeri alanlarinin oranlariyla birebir uyumludur.
+            {content.galleryDescription}
           </p>
         </div>
         <div className="grid auto-rows-[220px] gap-4 md:grid-cols-3">
@@ -256,17 +256,13 @@ export default async function Home() {
           </div>
           <article>
             <h2 className="text-3xl sm:text-4xl">
-              Neden Masaj Beylikduzu&rsquo;nu Secmelisiniz
+              {content.aboutHeading}
             </h2>
             <p className="mt-6 text-[#C9C2AE]">
-              Mekanda her oda gercek ahsap dokularla, dogal mum isigiyla ve
-              canli bitkilerle tasarlandi. Masaj Beylikduzu, Beylikduzu&rsquo;nde
-              masaj deneyimini yogun sehir temposundan ayrisan sakin bir ritimde
-              sunar.
+              {content.aboutText1}
             </p>
             <p className="mt-4 text-[#C9C2AE]">
-              Beylikduzu&rsquo;nun yesil alanlarina yakin, sakin bir sokakta
-              randevulu ve az sayida misafirle calisiyoruz.
+              {content.aboutText2}
             </p>
             <div className="mt-8 flex gap-10">
               <div>
@@ -288,10 +284,9 @@ export default async function Home() {
 
       <section className="bg-[linear-gradient(180deg,var(--forest),var(--forest-deep))] py-24 text-center">
         <div className="mx-auto max-w-6xl px-4 md:px-10">
-          <h2 className="text-3xl sm:text-4xl">Salonumuz Hangi Saatlerde Acik?</h2>
+          <h2 className="text-3xl sm:text-4xl">{content.hoursHeading}</h2>
           <p className="mx-auto mt-4 max-w-xl text-[#B7B09B]">
-            Masaj Beylikduzu, Beylikduzu&rsquo;nde her gun 10:00-21:00 saatleri
-            arasinda randevu kabul eder.
+            {content.hoursDescription}
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -313,7 +308,7 @@ export default async function Home() {
 
       <section id="yorumlar" className="mx-auto max-w-6xl px-4 py-24 md:px-10">
         <h2 className="text-center text-3xl sm:text-4xl">
-          Misafir Yorumlari ve Sosyal Kanit
+          {content.reviewsHeading}
         </h2>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {REVIEWS.map((review, index) => (
@@ -336,10 +331,9 @@ export default async function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pb-10 md:px-10">
         <article className="rounded-2xl border border-[rgba(224,164,88,.2)] bg-[rgba(12,23,18,.7)] p-8">
-          <h2 className="text-3xl sm:text-4xl">Sikca Sorulan Sorular</h2>
+          <h2 className="text-3xl sm:text-4xl">{content.faqHeading}</h2>
           <p className="mt-4 max-w-3xl text-[#C9C2AE]">
-            Masaj Beylikduzu hakkinda fiyat, randevu, cift masaji ve aromaterapi
-            gibi sorularin net cevaplarini SSS sayfasinda bulabilirsiniz.
+            {content.faqText}
           </p>
           <Link
             href="/sss"
@@ -356,19 +350,17 @@ export default async function Home() {
       >
         <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2 md:px-10">
           <article>
-            <h2 className="text-3xl sm:text-4xl">Bize Ulasin</h2>
+            <h2 className="text-3xl sm:text-4xl">{content.contactHeading}</h2>
             <p className="mt-5 text-[#C9C2AE]">
-              Masaj Beylikduzu, Beylikduzu&rsquo;nde randevulu calisan bir masaj
-              salonudur. Telefon ve WhatsApp hatti uzerinden hizli sekilde seans
-              saati planlayabilirsiniz.
+              {content.contactText}
             </p>
             <div className="mt-6 space-y-2 text-sm text-[#B7B09B]">
-              <p>Telefon: {BUSINESS.phoneDisplay}</p>
-              <p>Adres: {BUSINESS.addressLine}</p>
-              <p>Saatler: {BUSINESS.openingHours}</p>
+              <p>Telefon: {business.phoneDisplay}</p>
+              <p>Adres: {business.addressLine}</p>
+              <p>Saatler: {business.openingHours}</p>
             </div>
             <div className="mt-7">
-              <CtaButtons compact />
+              <CtaButtons compact business={business} />
             </div>
           </article>
           <article className="rounded-xl border border-[rgba(224,164,88,.15)] p-6">
@@ -378,7 +370,7 @@ export default async function Home() {
               kullanin.
             </p>
             <a
-              href={BUSINESS.mapsUrl}
+              href={business.mapsUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-5 inline-block rounded-full border border-[var(--amber)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--amber)]"

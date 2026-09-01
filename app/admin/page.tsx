@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GalleryManager } from "@/components/admin/gallery-manager";
+import { DashboardShell } from "@/components/admin/dashboard-shell";
 import { SignOutButton } from "@/components/admin/sign-out-button";
 import { GALLERY_SLOTS, type GallerySlotKey } from "@/data/gallery-slots";
 import { getAdminState, redirectToLogin } from "@/lib/admin-auth";
+import {
+  getBusinessSettings,
+  getHomepageContent,
+} from "@/lib/site-settings";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type GalleryItem = {
@@ -69,6 +73,8 @@ export default async function AdminPage() {
   }
 
   const supabase = await createSupabaseServerClient();
+  const initialBusiness = await getBusinessSettings();
+  const initialHomepage = await getHomepageContent();
   const items: GalleryItem[] = [];
 
   if (supabase) {
@@ -101,8 +107,11 @@ export default async function AdminPage() {
         </div>
         <SignOutButton />
       </div>
-
-      <GalleryManager initialItems={items} />
+      <DashboardShell
+        initialBusiness={initialBusiness}
+        initialHomepage={initialHomepage}
+        galleryItems={items}
+      />
     </main>
   );
 }

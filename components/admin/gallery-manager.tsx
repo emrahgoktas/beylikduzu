@@ -41,6 +41,7 @@ async function readImageDimensions(file: File) {
 
 export function GalleryManager({ initialItems }: Props) {
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
+  const [items, setItems] = useState(initialItems);
   const [slot, setSlot] = useState<GallerySlotKey>("hero");
   const [altText, setAltText] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -109,6 +110,18 @@ export function GalleryManager({ initialItems }: Props) {
         setLoading(false);
         return;
       }
+
+      const newItem: GalleryItem = {
+        slot,
+        image_url: publicUrl,
+        alt_text: altText || currentGuide.fallbackAlt,
+        width,
+        height,
+      };
+      setItems((prev) => {
+        const filtered = prev.filter((item) => item.slot !== slot);
+        return [newItem, ...filtered];
+      });
 
       setMessage("Gorsel basariyla guncellendi. Sayfayi yenileyip kontrol edin.");
       setFile(null);
@@ -189,7 +202,7 @@ export function GalleryManager({ initialItems }: Props) {
       {message ? <p className="mt-4 text-sm text-emerald-300">{message}</p> : null}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <article
             key={`${item.slot}-${item.image_url}`}
             className="rounded-xl border border-[rgba(224,164,88,.2)] p-3"

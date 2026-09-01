@@ -1,12 +1,12 @@
-import { BUSINESS } from "@/lib/site";
+import type { BusinessSettings } from "@/lib/site-settings";
 
-export function SiteFooter() {
+export function SiteFooter({ business }: { business: BusinessSettings }) {
   return (
     <footer className="footer-ambient border-t border-[rgba(224,164,88,.14)] bg-[var(--forest-deep)] pb-24 pt-16 md:pb-12">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-3 md:px-10">
         <div>
           <span className="font-display text-2xl italic text-[var(--amber)]">
-            Masaj Beylikduzu
+            {business.shortName}
           </span>
           <p className="mt-3 text-sm text-[#B7B09B]">
             Dogal dokular, sakin atmosfer ve profesyonel terapistlerle
@@ -18,15 +18,15 @@ export function SiteFooter() {
             Hizli Erisim
           </p>
           <div className="mt-3 space-y-2 text-sm text-[#B7B09B]">
-            <p>{BUSINESS.addressLine}</p>
+            <p>{business.addressLine}</p>
             <a
-              href={`tel:${BUSINESS.phoneE164}`}
+              href={`tel:${business.phoneE164}`}
               className="block hover:text-[var(--amber)]"
             >
-              {BUSINESS.phoneDisplay}
+              {business.phoneDisplay}
             </a>
             <a
-              href={BUSINESS.whatsappUrl}
+              href={business.whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="block hover:text-[var(--amber)]"
@@ -44,7 +44,7 @@ export function SiteFooter() {
             planlanir.
           </p>
           <a
-            href={`tel:${BUSINESS.phoneE164}`}
+            href={`tel:${business.phoneE164}`}
             className="mt-4 inline-flex rounded-full border border-[var(--amber)] px-4 py-2 text-xs uppercase tracking-[0.14em] text-[var(--amber)] transition hover:bg-[var(--amber)] hover:text-[var(--forest-deep)]"
           >
             Hemen Ara

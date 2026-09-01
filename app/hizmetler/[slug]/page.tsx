@@ -3,7 +3,8 @@ import Script from "next/script";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SERVICE_BY_SLUG, SERVICES, type Service } from "@/data/services";
-import { BUSINESS, SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
+import { getBusinessSettings } from "@/lib/site-settings";
 
 type PageProps = {
   params: Promise<{ slug: Service["slug"] }>;
@@ -16,13 +17,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const service = SERVICE_BY_SLUG[slug];
+  const business = await getBusinessSettings();
 
   if (!service) {
     return {};
   }
 
   const title = `${service.name} | Beylikduzu Masaj Salonu`;
-  const description = `Masaj Beylikduzu, Beylikduzu'nde ${service.name.toLowerCase()} hizmetini ${service.duration} seans suresiyle sunar. Bilgi ve randevu icin: ${BUSINESS.phoneDisplay}`;
+  const description = `Masaj Beylikduzu, Beylikduzu'nde ${service.name.toLowerCase()} hizmetini ${service.duration} seans suresiyle sunar. Bilgi ve randevu icin: ${business.phoneDisplay}`;
   const canonical = `/hizmetler/${service.slug}`;
 
   return {
@@ -64,6 +66,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const service = SERVICE_BY_SLUG[slug];
+  const business = await getBusinessSettings();
 
   if (!service) {
     notFound();
@@ -83,9 +86,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     provider: {
       "@id": `${SITE_URL}/#business`,
       "@type": "DaySpa",
-      name: BUSINESS.name,
+      name: business.name,
       url: SITE_URL,
-      telephone: BUSINESS.phoneE164,
+      telephone: business.phoneE164,
     },
     offers: {
       "@type": "Offer",
@@ -156,13 +159,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       <section className="mt-10 grid gap-4 rounded-2xl border border-[rgba(224,164,88,.2)] p-6 sm:grid-cols-2">
         <a
-          href={`tel:${BUSINESS.phoneE164}`}
+          href={`tel:${business.phoneE164}`}
           className="rounded-full bg-[var(--amber)] px-5 py-3 text-center text-xs uppercase tracking-[0.14em] text-[var(--forest-deep)]"
         >
           Telefonla Randevu Al
         </a>
         <a
-          href={BUSINESS.whatsappUrl}
+          href={business.whatsappUrl}
           target="_blank"
           rel="noreferrer"
           className="rounded-full border border-[var(--amber)] px-5 py-3 text-center text-xs uppercase tracking-[0.14em] text-[var(--amber)]"
